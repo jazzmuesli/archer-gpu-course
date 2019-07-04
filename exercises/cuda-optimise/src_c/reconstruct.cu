@@ -119,15 +119,17 @@ if ( N%THREADSPERBLOCK != 0 ){
 
 
     /* copy the output data from device to host */
-    cudaMemcpy(output, d_output, memSize, cudaMemcpyDeviceToHost);
+  //  cudaMemcpy(output, d_output, memSize, cudaMemcpyDeviceToHost);
 
     /* copy this same data from host to input buffer on device */
     /*  ready for the next iteration */ 
-    cudaMemcpy( d_input, output, memSize, cudaMemcpyHostToDevice);
+    //cudaMemcpy( d_input, output, memSize, cudaMemcpyHostToDevice);
 
+    cudaMemcpy(d_input, d_output, memSize, cudaMemcpyDeviceToDevice);
   }
 
-
+  cudaMemcpy(output, d_output, memSize, cudaMemcpyDeviceToHost);
+  
   end_time_inc_data = get_current_time();
 
   checkCUDAError("Main loop");

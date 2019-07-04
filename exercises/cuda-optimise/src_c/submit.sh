@@ -24,4 +24,4 @@ echo "CUDA_VISIBLE_DEVICES set to ${CUDA_VISIBLE_DEVICES}"
 
 cd $PBS_O_WORKDIR
 
-./reconstruct
+nvprof ./reconstruct
