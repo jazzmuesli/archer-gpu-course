@@ -56,6 +56,8 @@ int main(int argc, char *argv[])
 
 
 
+#define THREADSPERBLOCK_X 16
+#define THREADSPERBLOCK_Y 16
 
 #define THREADSPERBLOCK 256
 
@@ -93,8 +95,10 @@ if ( N%THREADSPERBLOCK != 0 ){
 
 
   /* CUDA decomposition */
-    dim3 blocksPerGrid(N/THREADSPERBLOCK,1,1);
-    dim3 threadsPerBlock(THREADSPERBLOCK,1,1);
+//    dim3 blocksPerGrid(N/THREADSPERBLOCK,1,1);
+//    dim3 threadsPerBlock(THREADSPERBLOCK,1,1);
+    dim3 blocksPerGrid(N/THREADSPERBLOCK_X, N/THREADSPERBLOCK_Y,1);
+    dim3 threadsPerBlock(THREADSPERBLOCK_X, THREADSPERBLOCK_Y,1);
 
    printf("Blocks: %d %d %d\n",blocksPerGrid.x,blocksPerGrid.y,blocksPerGrid.z);
    printf("Threads per block: %d %d %d\n",threadsPerBlock.x,threadsPerBlock.y,threadsPerBlock.z);
@@ -113,7 +117,7 @@ if ( N%THREADSPERBLOCK != 0 ){
   for (i = 0; i < ITERATIONS; i++) {
 
     /* run the kernel */
-    inverseEdgeDetect<<< blocksPerGrid, threadsPerBlock >>>((float (*)[N+2]) d_output, (float (*)[N+2]) d_input, (float (*)[N+2]) d_edge);
+    inverseEdgeDetect2D<<< blocksPerGrid, threadsPerBlock >>>((float (*)[N+2]) d_output, (float (*)[N+2]) d_input, (float (*)[N+2]) d_edge);
  
     cudaThreadSynchronize();
 
