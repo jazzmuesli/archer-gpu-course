@@ -1,0 +1,36 @@
+CUDA_VISIBLE_DEVICES set to 2
+==322905== NVPROF is profiling process 322905, command: ./reconstruct
+  Device name: Tesla V100-SXM2-16GB
+Image size: 2048x2048
+ITERATIONS: 5000
+Blocks: 64 256 1
+Threads per block: 32 8 1
+
+
+ ***TEST PASSED SUCCESSFULLY*** 
+
+
+GPU Time (Including Data Transfer): 0.668151s
+CPU Time                          : 27.930869s
+==322905== Profiling application: ./reconstruct
+==322905== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   57.25%  338.89ms      5000  67.777us  66.687us  74.879us  inverseEdgeDetect2D(float[2050]*, float[2050]*, float[2050]*)
+                   40.04%  236.99ms      5000  47.398us  46.463us  49.407us  [CUDA memcpy DtoD]
+                    1.85%  10.960ms         1  10.960ms  10.960ms  10.960ms  [CUDA memcpy DtoH]
+                    0.86%  5.0694ms         3  1.6898ms  1.6537ms  1.7164ms  [CUDA memcpy HtoD]
+      API calls:   48.37%  518.64ms      5000  103.73us  4.6330us  108.00us  cudaThreadSynchronize
+                   38.16%  409.20ms         3  136.40ms  205.71us  408.75ms  cudaMalloc
+                    9.14%  98.008ms      5004  19.585us  15.318us  11.741ms  cudaMemcpy
+                    3.77%  40.414ms      5000  8.0820us  7.2350us  613.20us  cudaLaunch
+                    0.27%  2.8527ms     15000     190ns     141ns  2.5280us  cudaSetupArgument
+                    0.12%  1.2762ms      5000     255ns     227ns  4.5220us  cudaConfigureCall
+                    0.06%  638.06us         3  212.69us  154.00us  318.34us  cudaFree
+                    0.05%  485.07us        94  5.1600us     175ns  193.43us  cuDeviceGetAttribute
+                    0.04%  466.37us         1  466.37us  466.37us  466.37us  cudaGetDeviceProperties
+                    0.02%  192.75us         1  192.75us  192.75us  192.75us  cuDeviceTotalMem
+                    0.00%  41.544us         1  41.544us  41.544us  41.544us  cuDeviceGetName
+                    0.00%  13.493us         1  13.493us  13.493us  13.493us  cudaGetDevice
+                    0.00%  2.3950us         2  1.1970us     258ns  2.1370us  cuDeviceGet
+                    0.00%  2.3250us         3     775ns     199ns  1.7060us  cuDeviceGetCount
+                    0.00%     370ns         1     370ns     370ns     370ns  cudaGetLastError
