@@ -1,0 +1,55 @@
+  Device name: GeForce GTX 970
+Image size: 2048x2048
+ITERATIONS: 100000
+Blocks: 64 256 1
+Threads per block: 32 8 1
+
+
+ ***TEST PASSED SUCCESSFULLY*** 
+
+
+GPU Time (Including Data Transfer): 59.079180s
+CPU Time                          : 630.456786s
+
+==10260== NVPROF is profiling process 10260, command: ./reconstruct
+  Device name: GeForce GTX 970
+Image size: 2048x2048
+ITERATIONS: 100000
+Blocks: 64 256 1
+Threads per block: 32 8 1
+
+
+ ***TEST PASSED SUCCESSFULLY***
+
+
+GPU Time (Including Data Transfer): 59.079180s
+CPU Time                          : 630.456786s
+==10260== Profiling application: ./reconstruct
+==10260== Profiling result:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 99.77%  33.9954s    100000  339.95us  331.77us  420.41us  inverseEdgeDetect2D(float[2050]*, float[2050]*, float[2050]*)
+  0.19%  65.866ms    100000     658ns     608ns  1.2160us  [CUDA memcpy DtoD]
+  0.02%  7.6473ms         3  2.5491ms  2.5463ms  2.5547ms  [CUDA memcpy HtoD]
+  0.02%  5.5886ms         1  5.5886ms  5.5886ms  5.5886ms  [CUDA memcpy DtoH]
+
+==10260== API calls:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 97.46%  57.5792s    100000  575.79us  282.71us  2.6965ms  cudaThreadSynchronize
+  1.51%  892.95ms    100004  8.9290us  7.3440us  18.916ms  cudaMemcpy
+  0.77%  455.63ms    100000  4.5560us  3.9920us  289.75us  cudaLaunch
+  0.15%  88.142ms         3  29.381ms  116.94us  87.876ms  cudaMalloc
+  0.07%  38.974ms    300000     129ns     109ns  278.02us  cudaSetupArgument
+  0.03%  17.948ms    100000     179ns     137ns  278.19us  cudaConfigureCall
+  0.01%  6.3119ms         3  2.1040ms  237.77us  3.0405ms  cudaFree
+  0.00%  349.96us        83  4.2160us      92ns  155.57us  cuDeviceGetAttribute
+  0.00%  342.76us         1  342.76us  342.76us  342.76us  cudaGetDeviceProperties
+  0.00%  67.206us         1  67.206us  67.206us  67.206us  cuDeviceTotalMem
+  0.00%  38.563us         1  38.563us  38.563us  38.563us  cuDeviceGetName
+  0.00%  4.6320us         1  4.6320us  4.6320us  4.6320us  cudaGetDevice
+  0.00%     910ns         2     455ns     195ns     715ns  cuDeviceGetCount
+  0.00%     648ns         1     648ns     648ns     648ns  cudaGetLastError
+  0.00%     353ns         2     176ns      99ns     254ns  cuDeviceGet
+
+real	11m33.572s
+user	11m41.016s
+sys	0m19.968s

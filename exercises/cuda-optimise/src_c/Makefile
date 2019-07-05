@@ -9,7 +9,7 @@ SRC= reconstruct.cu reconstruct_kernels.cu utilities.cu
 
 ARCH=sm_35
 CC=	nvcc
-CFLAGS= -O3 -arch=$(ARCH)
+CFLAGS= -D_FORCE_INLINES -O3 -arch=$(ARCH)
 
 default: $(EXE)
 
