@@ -10,7 +10,7 @@ SRC= intro.cu
 ARCH=sm_35
 
 CC=	nvcc
-CFLAGS= -Xptxas -v -O3 -arch=$(ARCH)
+CFLAGS= -D_FORCE_INLINES  -Xptxas -v -O3 -arch=$(ARCH)
 
 default: $(EXE)
 
