@@ -1,0 +1,21 @@
+OpenMP version
+OMP_NUM_THREADS=1
+  Total size S = 4194304 N = 4096 M = 1024
+  Computed result for 4096 x 1024 is 4194304.000000
+  N( 4096 ) M( 1024 ) nrepeat ( 100 ) problem( 33.5954 MB ) time( 0.704149 s ) bandwidth( 4.77106 GB/s )
+OMP_NUM_THREADS=2
+  Total size S = 4194304 N = 4096 M = 1024
+  Computed result for 4096 x 1024 is 4194304.000000
+  N( 4096 ) M( 1024 ) nrepeat ( 100 ) problem( 33.5954 MB ) time( 0.352905 s ) bandwidth( 9.51967 GB/s )
+OMP_NUM_THREADS=4
+  Total size S = 4194304 N = 4096 M = 1024
+  Computed result for 4096 x 1024 is 4194304.000000
+  N( 4096 ) M( 1024 ) nrepeat ( 100 ) problem( 33.5954 MB ) time( 0.176994 s ) bandwidth( 18.9811 GB/s )
+OMP_NUM_THREADS=8
+  Total size S = 4194304 N = 4096 M = 1024
+  Computed result for 4096 x 1024 is 4194304.000000
+  N( 4096 ) M( 1024 ) nrepeat ( 100 ) problem( 33.5954 MB ) time( 0.089143 s ) bandwidth( 37.6871 GB/s )
+Cuda version
+  Total size S = 4194304 N = 4096 M = 1024
+  Computed result for 4096 x 1024 is 4194304.000000
+  N( 4096 ) M( 1024 ) nrepeat ( 100 ) problem( 33.5954 MB ) time( 0.022862 s ) bandwidth( 146.949 GB/s )
