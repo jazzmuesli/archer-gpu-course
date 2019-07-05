@@ -1,0 +1,27 @@
+CUDA_VISIBLE_DEVICES set to 2
+==345599== NVPROF is profiling process 345599, command: ./reverse
+==345599==   Device name: Tesla V100-SXM2-16GB
+Results: Number of correctly reversed elements 65536 (Correct)
+
+Profiling application: ./reverse
+==345599== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   49.49%  26.207us         2  13.103us  1.6640us  24.543us  [CUDA memcpy HtoD]
+                   39.34%  20.832us         1  20.832us  20.832us  20.832us  [CUDA memcpy DtoH]
+                   11.18%  5.9200us         1  5.9200us  5.9200us  5.9200us  reverseArray(int*, int*)
+      API calls:   99.62%  434.11ms         2  217.06ms  7.6620us  434.11ms  cudaMalloc
+                    0.11%  487.08us        94  5.1810us     173ns  196.05us  cuDeviceGetAttribute
+                    0.11%  467.23us         1  467.23us  467.23us  467.23us  cudaGetDeviceProperties
+                    0.05%  208.20us         2  104.10us  20.699us  187.50us  cudaFree
+                    0.05%  197.22us         1  197.22us  197.22us  197.22us  cuDeviceTotalMem
+                    0.03%  135.89us         2  67.944us  38.604us  97.285us  cudaMemcpy
+                    0.01%  43.122us         1  43.122us  43.122us  43.122us  cudaLaunch
+                    0.01%  41.736us         1  41.736us  41.736us  41.736us  cuDeviceGetName
+                    0.01%  26.262us         1  26.262us  26.262us  26.262us  cudaMemcpyToSymbol
+                    0.00%  12.778us         1  12.778us  12.778us  12.778us  cudaGetDevice
+                    0.00%  11.733us         1  11.733us  11.733us  11.733us  cudaDeviceSynchronize
+                    0.00%  2.5330us         3     844ns     193ns  1.9200us  cuDeviceGetCount
+                    0.00%  2.4060us         2  1.2030us     247ns  2.1590us  cudaSetupArgument
+                    0.00%  2.2910us         2  1.1450us     206ns  2.0850us  cuDeviceGet
+                    0.00%  1.3740us         1  1.3740us  1.3740us  1.3740us  cudaConfigureCall
+                    0.00%     461ns         2     230ns     183ns     278ns  cudaGetLastError
