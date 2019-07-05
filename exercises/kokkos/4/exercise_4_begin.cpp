@@ -95,17 +95,17 @@ int main( int argc, char* argv[] )
   checkSizes( N, M, S, nrepeat );
 
   Kokkos::initialize( argc, argv );
-
+  {
   // EXERCISE give-away: Choose an Execution Space.
   // typedef Kokkos::Serial   ExecSpace;
   // typedef Kokkos::Threads  ExecSpace;
   // typedef Kokkos::OpenMP   ExecSpace;
-  // typedef Kokkos::Cuda     ExecSpace;
+  typedef Kokkos::Cuda     ExecSpace;
 
   // EXERCISE: Choose device memory space.
   // typedef Kokkos::HostSpace     MemSpace;
   // typedef Kokkos::OpenMP        MemSpace;
-  // typedef Kokkos::CudaSpace     MemSpace;
+   typedef Kokkos::CudaSpace     MemSpace;
   // typedef Kokkos::CudaUVMSpace  MemSpace;
 
   // EXERCISE give-away: Choose a Layout.
@@ -113,11 +113,11 @@ int main( int argc, char* argv[] )
   //           either layout will generate the correct answer.
   //           However, performance will be different!
 
-  // typedef Kokkos::LayoutLeft   Layout;
+   typedef Kokkos::LayoutLeft   Layout;
   // typedef Kokkos::LayoutRight  Layout;
 
   // EXERCISE give-away: Use a RangePolicy.
-  // typedef Kokkos::RangePolicy<ExecSpace>  range_policy;
+   typedef Kokkos::RangePolicy<ExecSpace>  range_policy;
 
   // Allocate y, x vectors and Matrix A on device.
   // EXERCISE: Use MemSpace and Layout.
@@ -165,7 +165,7 @@ int main( int argc, char* argv[] )
 
     // EXERCISE: Use Kokkos::RangePolicy<ExecSpace> to execute parallel_reduce
     //           in the correct space.
-    Kokkos::parallel_reduce( N, KOKKOS_LAMBDA ( int j, double &update ) {
+    Kokkos::parallel_reduce( range_policy(0, N), KOKKOS_LAMBDA ( int j, double &update ) {
       double temp2 = 0;
 
       for ( int i = 0; i < M; ++i ) {
@@ -203,7 +203,7 @@ int main( int argc, char* argv[] )
   // Print results (problem size, time and bandwidth in GB/s).
   printf( "  N( %d ) M( %d ) nrepeat ( %d ) problem( %g MB ) time( %g s ) bandwidth( %g GB/s )\n",
           N, M, nrepeat, Gbytes * 1000, time, Gbytes * nrepeat / time );
-
+ } 
   Kokkos::finalize();
 
   return 0;
