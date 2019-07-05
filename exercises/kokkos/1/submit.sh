@@ -10,7 +10,7 @@
 #PBS -A y15
 
 # Load the required modules
-module load gcc cuda kokkos
+module load gcc cuda kokkos 
 
 cd $PBS_O_WORKDIR
 
@@ -20,5 +20,5 @@ export OMP_PROC_BIND=close
 for threads in 1 2 4 8; do
     export OMP_NUM_THREADS=$threads
     echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
-    ./01_Exercise.OpenMP
+    nvprof ./01_Exercise.OpenMP
 done
