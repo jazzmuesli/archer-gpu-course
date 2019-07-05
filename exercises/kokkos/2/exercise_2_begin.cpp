@@ -97,7 +97,7 @@ int main( int argc, char* argv[] )
   checkSizes( N, M, S, nrepeat );
 
   Kokkos::initialize( argc, argv );
-
+  {
   // EXERCISE: Create views of the right size.
 
   // 1. Device Views
@@ -186,7 +186,7 @@ int main( int argc, char* argv[] )
   //delete  y;  //EXERCISE hint: ...
   //delete  x;  //EXERCISE hint: ...
   //delete  A;  //EXERCISE hint: ...
-
+  }
   Kokkos::finalize();
 
   return 0;
