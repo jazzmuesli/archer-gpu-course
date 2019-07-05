@@ -25,14 +25,29 @@ void checkCUDAError(const char*);
 
 #define ARRAY_SIZE 65536
 
+static __constant__ int arraySize;
+
 /* Reverse the elements in the input array d_in.
  * The total number of threads should be ARRAY_SIZE. */
 
 __global__ void reverseArray(int * d_in, int * d_out)
 {
+
+   __shared__ int tmp[THREADS_PER_BLOCK];
+
+  int blockOffset;
+
   int idx = blockIdx.x*blockDim.x + threadIdx.x;
 
-  d_out[idx] = d_in[ARRAY_SIZE - (idx + 1)];
+  tmp[THREADS_PER_BLOCK-(threadIdx.x+1)] = d_in[idx];
+  __syncthreads();
+
+  blockOffset = arraySize - (blockIdx.x + 1)*blockDim.x;
+  d_out[blockOffset + threadIdx.x] = tmp[threadIdx.x];
+
+//  int idx = blockIdx.x*blockDim.x + threadIdx.x;
+
+//  d_out[idx] = d_in[arraySize - (idx + 1)];
 }
 
 
@@ -73,6 +88,8 @@ int main(int argc, char *argv[])
         h_out[i] = 0;
     }
 
+    int hostArraySize = ARRAY_SIZE;
+    cudaMemcpyToSymbol(arraySize, &hostArraySize, sizeof(int));
     /* copy input array from host to GPU */
 
     cudaMemcpy(d_in, h_in, sz, cudaMemcpyHostToDevice);
@@ -101,7 +118,7 @@ int main(int argc, char *argv[])
       if (h_out[i] == h_in[ARRAY_SIZE - (i+1)]) ncorrect += 1;
     }
     printf("Number of correctly reversed elements %d (%s)\n", ncorrect,
-           ncorrect == ARRAY_SIZE ? "Correct" : "INCORRECT");
+           ncorrect == ARRAY_SIZE? "Correct" : "INCORRECT");
     printf("\n");
 
     /* free device buffers */
