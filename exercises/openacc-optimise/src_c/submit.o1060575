@@ -1,0 +1,11 @@
+CUDA_VISIBLE_DEVICES set to 0
+Processing 2048 x 2048 image
+Number of iterations = 100
+
+Reading <edge2048x2048.dat>
+
+Main Loop Time                          : 0.617638s
+
+Finished 100 iterations
+
+Writing <image2048x2048.pgm>

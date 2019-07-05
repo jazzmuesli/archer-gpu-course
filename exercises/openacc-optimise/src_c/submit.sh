@@ -15,6 +15,7 @@
 # Load the required modules
 module load gcc
 module load cuda
+module load pgi
 
 # Pick a random device as PBS on Cirrus not yet configured to control
 # GPU visibility
@@ -24,4 +25,4 @@ echo "CUDA_VISIBLE_DEVICES set to ${CUDA_VISIBLE_DEVICES}"
 
 cd $PBS_O_WORKDIR
 
-./reconstruct
+pgprof ./reconstruct
